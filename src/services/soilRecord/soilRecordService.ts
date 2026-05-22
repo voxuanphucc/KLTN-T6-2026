@@ -33,7 +33,7 @@ export const soilRecordService = {
 
   /**
    * Lấy danh sách hồ sơ đất theo plot
-   * GET /api/v1/plots/{plotId}/soil-records
+   * GET /api/v1/plots/{plotId}/soil-records  
    */
   async getAllSoilRecordsByPlot(plotId: string): Promise<ApiResponse<SoilRecord[]>> {
     const response = await axiosInstance.get<ApiResponse<SoilRecord[]>>(`/api/v1/plots/${plotId}/soil-records`);

@@ -289,10 +289,10 @@ export function SeasonPlanListPage() {
                       {/* Progress */}
                       <div className="space-y-1.5">
                         <div className="flex justify-between text-[11px] font-bold">
-                          <span className="text-slate-400 uppercase tracking-widest">Tiến độ</span>
+                          {/* <span className="text-slate-400 uppercase tracking-widest">Tiến độ</span>
                           <span className="text-indigo-600 font-black">
                             {progressPercent}%
-                          </span>
+                          </span> */}
                         </div>
                         <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden shadow-inner border border-slate-200/50">
                           <div className="h-full bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full transition-all duration-700 ease-out"

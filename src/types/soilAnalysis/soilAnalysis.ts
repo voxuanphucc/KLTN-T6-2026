@@ -39,3 +39,29 @@ export interface SubmitSoilAnalysisResponse {
   status: SoilAnalysisJobStatus;
   pollUrl: string;
 }
+
+export interface CropTypeResponse {
+  id?: string;
+  name?: string;
+  description?: string;
+}
+
+export type CropScope = string;
+
+export interface CropResponse {
+  id: string;
+  name: string;
+  version?: number;
+  cropType?: CropTypeResponse;
+  scope?: CropScope;
+  clonedFromId?: string | null;
+  imageUrl?: string | null;
+  description?: string | null;
+}
+
+export interface PlotCropRecommendation {
+  crop: CropResponse;
+  suitabilityPercent: number;
+  recommendationReason?: string;
+  description?: string;
+}

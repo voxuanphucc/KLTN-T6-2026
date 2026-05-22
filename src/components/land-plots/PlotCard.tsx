@@ -1,4 +1,4 @@
-import { Edit2Icon, Trash2Icon, MapIcon, MaximizeIcon } from 'lucide-react'
+import { Edit2Icon, Trash2Icon, MapIcon, MaximizeIcon, Leaf } from 'lucide-react'
 import { Plot } from '@/types/plot'
 import { PlotStatusBadge } from './PlotStatusBadge'
 
@@ -7,9 +7,10 @@ interface PlotCardProps {
   onEdit: (plot: Plot) => void
   onDelete: (plot: Plot) => void
   onViewMap: (plot: Plot) => void
+  onViewRecommendations: (plot: Plot) => void
 }
 
-export function PlotCard({ plot, onEdit, onDelete, onViewMap }: PlotCardProps) {
+export function PlotCard({ plot, onEdit, onDelete, onViewMap, onViewRecommendations }: PlotCardProps) {
   return (
     <div className="bg-white transition-all overflow-hidden group font-sans text-left px-4 py-4">
       <div className="p-5">
@@ -43,14 +44,23 @@ export function PlotCard({ plot, onEdit, onDelete, onViewMap }: PlotCardProps) {
         </div>
       </div>
 
-      <div className="bg-gray-50 px-5 py-3 border-t border-gray-100 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
-        <button
-          onClick={() => onViewMap(plot)}
-          className="text-sm font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1.5"
-        >
-          <MapIcon className="w-4 h-4" />
-          Bản đồ
-        </button>
+      <div className="bg-gray-50 px-5 py-3 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => onViewMap(plot)}
+            className="text-sm font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1.5"
+          >
+            <MapIcon className="w-4 h-4" />
+            Bản đồ
+          </button>
+          <button
+            onClick={() => onViewRecommendations(plot)}
+            className="text-sm font-bold text-emerald-600 hover:text-emerald-800 flex items-center gap-1.5"
+          >
+            <Leaf className="w-4 h-4" />
+            Đề xuất
+          </button>
+        </div>
 
         <div className="flex gap-1.5">
           <button

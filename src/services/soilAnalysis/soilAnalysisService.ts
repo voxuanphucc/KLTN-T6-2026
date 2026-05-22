@@ -2,6 +2,7 @@ import { axiosInstance } from '../../config/axios';
 import { ApiResponse } from '../../types/auth';
 
 import {
+  PlotCropRecommendation,
   SoilAnalysisJob,
   SubmitSoilAnalysisRequest,
   SubmitSoilAnalysisResponse,
@@ -39,6 +40,23 @@ export const soilAnalysisService = {
       ApiResponse<SoilAnalysisJob>
     >(
       `/api/v1/soil-analysis/${jobId}`,
+    );
+
+    return response.data;
+  },
+
+  /**
+   * Get crop recommendations for a specific plot
+   * GET /api/v1/soil-analysis/plot/{plotId}
+   */
+  async getPlotCropRecommendations(
+    plotId: string,
+  ): Promise<ApiResponse<PlotCropRecommendation[]>> {
+
+    const response = await axiosInstance.get<
+      ApiResponse<PlotCropRecommendation[]>
+    >(
+      `/api/v1/soil-analysis/plot/${plotId}`,
     );
 
     return response.data;

@@ -15,11 +15,8 @@ export function useRegister() {
   });
 
   const onSubmit = form.handleSubmit(async (data: RegisterInput) => {
-    // setServerError(null); // Removed to prevent UI flickering
     setIsSuccess(false);
-
     try {
-      // payload omitting farmName as per original logic
       const payload = {
         email: data.email,
         password: data.password,

@@ -1,4 +1,4 @@
-import { Edit2Icon, Trash2Icon, MapIcon } from 'lucide-react'
+import { Edit2Icon, Trash2Icon, MapIcon, Leaf } from 'lucide-react'
 import { Plot } from '@/types/plot'
 import { PlotStatusBadge } from './PlotStatusBadge'
 
@@ -7,6 +7,7 @@ interface PlotTableProps {
   onEdit: (plot: Plot) => void
   onDelete: (plot: Plot) => void
   onViewMap: (plot: Plot) => void
+  onViewRecommendations: (plot: Plot) => void
 }
 
 export function PlotTable({
@@ -14,6 +15,7 @@ export function PlotTable({
   onEdit,
   onDelete,
   onViewMap,
+  onViewRecommendations,
 }: PlotTableProps) {
   if (plots.length === 0) {
     return (
@@ -74,6 +76,13 @@ export function PlotTable({
                       title="Xem trên bản đồ"
                     >
                       <MapIcon className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => onViewRecommendations(plot)}
+                      className="p-2 text-slate-600 bg-white border border-slate-200 hover:text-emerald-700 hover:border-emerald-300 rounded-lg transition-all shadow-sm"
+                      title="Xem cây trồng phù hợp"
+                    >
+                      <Leaf className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => onEdit(plot)}

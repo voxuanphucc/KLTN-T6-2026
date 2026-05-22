@@ -1,4 +1,4 @@
-import { X, Seedling, Loader2 } from 'lucide-react';
+import { X, Leaf, Loader2 } from 'lucide-react';
 import { PlotCropRecommendation } from '@/types/soilAnalysis/soilAnalysis';
 
 interface Props {
@@ -21,13 +21,13 @@ export function PlotCropRecommendationModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-auto">
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative bg-white rounded-3xl shadow-2xl w-full max-w-3xl overflow-hidden">
-        <div className="px-6 pt-6 pb-4 border-b border-slate-100 flex items-center justify-between gap-4">
+      <div className="relative bg-white rounded-3xl shadow-2xl w-full max-w-3xl max-h-[calc(100vh-3rem)] overflow-hidden flex flex-col">
+        <div className="px-6 pt-6 pb-4 border-b border-slate-100 flex items-center justify-between gap-4 flex-shrink-0">
           <div className="flex items-center gap-3">
             <div className="w-11 h-11 rounded-2xl bg-emerald-600 flex items-center justify-center text-white shadow-lg shadow-emerald-500/25">
-              <Seedling size={20} />
+              <Leaf size={20} />
             </div>
             <div>
               <h2 className="text-lg font-bold text-slate-900">Cây trồng phù hợp cho lô đất</h2>
@@ -43,7 +43,7 @@ export function PlotCropRecommendationModal({
           </button>
         </div>
 
-        <div className="px-6 py-6">
+        <div className="px-6 py-6 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 12rem)' }}>
           {loading ? (
             <div className="flex flex-col items-center justify-center py-16 text-slate-500">
               <Loader2 className="w-8 h-8 animate-spin" />
@@ -71,7 +71,7 @@ export function PlotCropRecommendationModal({
                       )}
                     </div>
                     <span className="inline-flex items-center gap-2 rounded-full bg-emerald-100 text-emerald-800 px-3 py-1 text-xs font-semibold">
-                      <Seedling size={14} />
+                      <Leaf size={14} />
                       {recommendation.suitabilityPercent?.toFixed(0)}%
                     </span>
                   </div>

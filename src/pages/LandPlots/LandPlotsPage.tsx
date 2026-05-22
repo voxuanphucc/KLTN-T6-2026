@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/auth/useAuth';
 import { usePlots } from '@/hooks/plots/usePlots';
+import { usePlotCropRecommendations } from '@/hooks/soilAnalysis/usePlotCropRecommendations';
 import { Plot, CreatePlotRequest } from '@/types/plot/plot';
 import { extractErrorMessage } from '../../utils/errorUtils';
 import { toast } from 'sonner';
@@ -13,6 +14,7 @@ import { PlotFilters } from '@/components/land-plots/PlotFilters';
 import { CreatePlotModal } from '@/components/land-plots/CreatePlotModal';
 import { EditPlotModal } from '@/components/land-plots/EditPlotModal';
 import { DeletePlotDialog } from '@/components/land-plots/DeletePlotDialog';
+import { PlotCropRecommendationModal } from '@/components/land-plots/PlotCropRecommendationModal';
 
 export function LandPlotsPage() {
   const navigate = useNavigate();
@@ -33,6 +35,11 @@ export function LandPlotsPage() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [editingPlot, setEditingPlot] = useState<Plot | null>(null);
   const [deletingPlot, setDeletingPlot] = useState<Plot | null>(null);
+  const [selectedPlotRecommendation, setSelectedPlotRecommendation] = useState<Plot | null>(null);
+
+  const { recommendations, isLoading: isRecommendationLoading, error: recommendationError } = usePlotCropRecommendations(
+    selectedPlotRecommendation?.id,
+  );
 
   // Fetch data handled automatically by usePlots hook reacting to currentFarmId
 
@@ -107,6 +114,10 @@ export function LandPlotsPage() {
         source: 'land-plots',
       },
     });
+  };
+
+  const handleViewRecommendations = (plot: Plot) => {
+    setSelectedPlotRecommendation(plot);
   };
 
   const handleEditPlotInfo = (plot: Plot) => {
@@ -188,6 +199,7 @@ export function LandPlotsPage() {
             onEdit={handleEditPlotInfo}
             onDelete={setDeletingPlot}
             onViewMap={handleViewMap}
+            onViewRecommendations={handleViewRecommendations}
           />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -198,6 +210,7 @@ export function LandPlotsPage() {
                 onEdit={handleEditPlotInfo}
                 onDelete={setDeletingPlot}
                 onViewMap={handleViewMap}
+                onViewRecommendations={handleViewRecommendations}
               />
             ))}
             {filteredPlots.length === 0 && (
@@ -234,6 +247,15 @@ export function LandPlotsPage() {
         onConfirm={handleDeletePlot}
         plot={deletingPlot}
         hasActiveTasks={false}
+      />
+
+      <PlotCropRecommendationModal
+        isOpen={!!selectedPlotRecommendation}
+        plotName={selectedPlotRecommendation?.name}
+        recommendations={recommendations}
+        loading={isRecommendationLoading}
+        error={recommendationError}
+        onClose={() => setSelectedPlotRecommendation(null)}
       />
     </div>
   );
