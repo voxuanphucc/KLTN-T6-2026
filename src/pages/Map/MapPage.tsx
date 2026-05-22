@@ -463,7 +463,7 @@ export function MapPage() {
         />
         {/* Search box — hiện khi toàn màn hình */}
         {isFullscreen && (
-          <div className="absolute top-3 right-4 z-20 w-[220px] sm:w-[260px]">
+          <div className="absolute top-3 left-1/2 -translate-x-1/2 z-20 w-[220px] sm:w-[300px]">
             <div className="relative shadow-md rounded-xl border border-gray-200 bg-white/95 backdrop-blur-md">
               <input
                 type="text"

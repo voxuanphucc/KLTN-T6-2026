@@ -5,7 +5,7 @@ import { usePlots } from '@/hooks/plots/usePlots';
 import { useCrops } from '@/hooks/crops/useCrops';
 import { useAuth } from '@/hooks/auth/useAuth';
 import { useSeasonPlans } from '@/hooks/seasonPlans/useSeasonPlans';
-import { calculatePlanProgress } from '@/utils/seasonPlanUtils';
+import { useMembers } from '@/hooks/members/useMembers';
 import { EditFarmModal } from '../../components/farm/EditFarmModal';
 import { toast } from 'sonner';
 import { ConfirmModal } from '../../components/ui/ConfirmModal';
@@ -33,6 +33,7 @@ const FarmActionsPage: React.FC = () => {
     const { plots, plotsLoading } = usePlots();
     const { systemCrops, systemCropsLoading } = useCrops(farmId);
     const { plans, fetchStages, loading: loadingPlans } = useSeasonPlans(farmId);
+    const { members, fetchMembers, loadingMembers } = useMembers();
 
     useEffect(() => {
         if (farmId === 'null' || !farmId) {
@@ -57,10 +58,11 @@ const FarmActionsPage: React.FC = () => {
         }
     }, [farms.length, fetchFarms]);
 
-    // Calculate plan progress average using unified utility
-    const planProgress = plans.length > 0
-        ? Math.round(plans.reduce((acc, plan) => acc + calculatePlanProgress(plan), 0) / plans.length)
-        : 0;
+    useEffect(() => {
+        if (farmId && farmId !== 'null') {
+            fetchMembers(farmId);
+        }
+    }, [farmId, fetchMembers]);
 
 
     // Ưu tiên tìm trong list 'farms' (full detail) để có description
@@ -137,8 +139,8 @@ const FarmActionsPage: React.FC = () => {
                     plotsCount={plots.length}
                     cropsCount={systemCrops.length}
                     plansCount={plans.length}
-                    planProgress={planProgress}
-                    loading={plotsLoading || systemCropsLoading || loadingPlans}
+                    membersCount={members.length}
+                    loading={plotsLoading || systemCropsLoading || loadingPlans || loadingMembers}
                     showWeather={true}
                 />
 

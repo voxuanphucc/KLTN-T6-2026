@@ -1,11 +1,11 @@
-import { Droplets, Thermometer, Wind, Map, Trees, ClipboardList, Activity, TrendingUp, TrendingDown } from 'lucide-react';
+import { Droplets, Thermometer, Wind, Map, Trees, ClipboardList, Users, TrendingUp, TrendingDown } from 'lucide-react';
 import { useWeather } from '@/hooks/weather/useWeather';
 
 interface QuickStatsProps {
   plotsCount: number;
   cropsCount: number;
   plansCount: number;
-  planProgress: number;
+  membersCount: number;
   loading?: boolean;
   showWeather?: boolean;
 }
@@ -14,7 +14,7 @@ export default function QuickStats({
   plotsCount,
   cropsCount,
   plansCount,
-  planProgress,
+  membersCount,
   loading: farmLoading = false,
   showWeather = false
 }: QuickStatsProps) {
@@ -73,10 +73,10 @@ export default function QuickStats({
       color: 'indigo',
     },
     {
-      label: 'Tiến trình',
-      value: farmLoading ? '...' : `${planProgress}%`,
-      subLabel: 'Trạng thái',
-      icon: Activity,
+      label: 'Thành viên',
+      value: farmLoading ? '...' : membersCount,
+      subLabel: 'Nhân sự',
+      icon: Users,
       color: 'rose',
     },
   ].filter(item => {

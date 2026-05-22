@@ -78,16 +78,6 @@ export const PestDiseaseReportPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-3 w-full sm:w-auto">
-
-          <button
-            onClick={() => setIsCreateModalOpen(true)}
-            className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-all font-semibold text-sm shadow-sm shadow-red-200"
-          >
-            <Plus size={18} />
-            Tạo báo cáo mới
-          </button>
-        </div>
       </div>
 
 
