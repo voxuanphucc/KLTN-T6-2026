@@ -123,7 +123,7 @@ export function EditWarehouseItemModal({ farmId, warehouseId, item, isOpen, onCl
                 </select>
               </div>
               <div>
-                <label className={labelCls}>Mã SKU <span className="text-rose-500">*</span></label>
+                <label className={labelCls}>Mã SKU </label>
                 <select value={form.sku} onChange={e => setForm(p => ({ ...p, sku: e.target.value }))} className={selectCls}>
                   <option value="">Chọn SKU</option>
                   {skus.map(s => <option key={s.sku} value={s.sku}>{s.sku}</option>)}

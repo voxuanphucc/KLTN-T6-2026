@@ -15,7 +15,7 @@ import type { DiseaseReportResponse } from '@/types/diseaseReport/diseaseReport'
 // Mapping report status to Vietnamese
 const reportStatusMap: Record<string, string> = {
   'QUEUED': 'Chờ xử lý',
-  'IN_PROGRESS': 'Đang xử lý',
+  'PROCESSING': 'Đang xử lý',
   'DONE': 'Đã xử lý',
   'FAILED': 'Thất bại',
   'CANCELLED': 'Đã hủy'
@@ -80,13 +80,13 @@ export const PestDiseaseReportPage: React.FC = () => {
 
         <div className="flex items-center gap-3 w-full sm:w-auto">
 
-          <button
+          {/* <button
             onClick={() => setIsCreateModalOpen(true)}
             className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2.5 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-all font-semibold text-sm shadow-sm shadow-red-200"
           >
             <Plus size={18} />
             Tạo báo cáo mới
-          </button>
+          </button> */}
         </div>
       </div>
 
@@ -154,10 +154,10 @@ export const PestDiseaseReportPage: React.FC = () => {
                     </td>
                     <td className="px-6 py-4">
                       {report.status === 'QUEUED' && <span className="text-xs font-bold px-2.5 py-1 rounded-md bg-yellow-100 text-yellow-700">{getReportStatusInVietnamese('QUEUED')}</span>}
-                      {report.status === 'IN_PROGRESS' && <span className="text-xs font-bold px-2.5 py-1 rounded-md bg-blue-100 text-blue-700">{getReportStatusInVietnamese('IN_PROGRESS')}</span>}
+                      {report.status === 'PROCESSING' && <span className="text-xs font-bold px-2.5 py-1 rounded-md bg-blue-100 text-blue-700">{getReportStatusInVietnamese('PROCESSING')}</span>}
                       {report.status === 'COMPLETED' && <span className="text-xs font-bold px-2.5 py-1 rounded-md bg-green-100 text-green-700">{getReportStatusInVietnamese('COMPLETED')}</span>}
                       {report.status === 'FAILED' && <span className="text-xs font-bold px-2.5 py-1 rounded-md bg-red-100 text-red-700">{getReportStatusInVietnamese('FAILED')}</span>}
-                      {!['QUEUED', 'IN_PROGRESS', 'COMPLETED', 'FAILED'].includes(report.status) && (
+                      {!['QUEUED', 'PROCESSING', 'COMPLETED', 'FAILED'].includes(report.status) && (
                         <span className="text-xs font-bold px-2.5 py-1 rounded-md bg-slate-100 text-slate-700">{getReportStatusInVietnamese(report.status)}</span>
                       )}
                     </td>

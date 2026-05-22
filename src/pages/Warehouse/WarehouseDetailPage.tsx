@@ -1681,7 +1681,7 @@ const isExport =
                   </select>
                 </div>
                 <div>
-                  <FieldLabel required>Mã SKU</FieldLabel>
+                  <FieldLabel >Mã SKU</FieldLabel>
                   <select
                     // required
                     value={itemForm.sku}
